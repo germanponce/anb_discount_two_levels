@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('page')]//t[@t-set='display_discount']" position="after">
+            <t t-set="display_discount2" t-value="any([l.discount2 for l in o.invoice_line_ids])"/>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]//table[1]/thead/tr/th[5]" position="after">
+            <th t-if="display_discount2" class="text-right">Disc.2(%)</th>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]//table[1]/tbody//tr//td[5]" position="after">
+            <td t-if="display_discount2" class="text-right">
+                <span t-field="line.discount2"/>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>
